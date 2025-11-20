@@ -1,39 +1,22 @@
-//your JS code here. If required.
-const sounds = ["applause", "boo", "gasp", "tada", "victory", "wrong"];
+// Create audio objects for each sound
+const sound1 = new Audio('sounds/sound1.mp3');
+const sound2 = new Audio('sounds/sound2.mp3');
+const sound3 = new Audio('sounds/sound3.mp3');
 
-let container = document.getElementById("buttons");
-
-// Create buttons for each sound
-sounds.forEach(sound => {
-    let btn = document.createElement("button");
-    btn.className = "btn";
-    btn.innerText = sound;
-
-    btn.addEventListener("click", () => {
-        stopAll();
-        let audio = new Audio(`sounds/${sound}.mp3`);
-        audio.play();
-        currentAudio = audio;
-    });
-
-    container.appendChild(btn);
-});
-
-// Create stop button
-let stopBtn = document.createElement("button");
-stopBtn.className = "stop";
-stopBtn.innerText = "stop";
-
-let currentAudio = null;
-
-stopBtn.addEventListener("click", stopAll);
-container.appendChild(stopBtn);
-
-// stop function
-function stopAll() {
-    if (currentAudio) {
-        currentAudio.pause();
-        currentAudio.currentTime = 0;
-        currentAudio = null;
-    }
+// Function to play sound
+function playSound(sound) {
+    sound.currentTime = 0; // Reset sound to start
+    sound.play();
 }
+
+// Event listeners for buttons
+document.getElementById('sound1').addEventListener('click', () => playSound(sound1));
+document.getElementById('sound2').addEventListener('click', () => playSound(sound2));
+document.getElementById('sound3').addEventListener('click', () => playSound(sound3));
+
+// Stop button functionality
+document.querySelector('.stop').addEventListener('click', () => {
+    sound1.pause();
+    sound2.pause();
+    sound3.pause();
+});
